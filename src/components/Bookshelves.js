@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Shelf from './Shelf';
 import Header from './Header';
+import Divider from '@mui/material/Divider';
 import Footer from './Footer'
+import SearchIcon from '@mui/icons-material/Search';
 
 const Bookshelves = ({ allBooks, shelf, updateShelf }) => {
   const currentlyReading = allBooks.filter(
@@ -37,8 +39,7 @@ const Bookshelves = ({ allBooks, shelf, updateShelf }) => {
           />
         </div>
         <div className='open-search'>
-          <Link to='/search' className='open-search-button'>
-            Add a book
+          <Link to='/search' className='open-search'>
           </Link>
         </div>
       </div>

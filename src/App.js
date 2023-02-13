@@ -29,6 +29,22 @@ const App = () => {
     }
   };
 
+  const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [value, delay]);
+
+    return debouncedValue;
+  };
+
   return (
     <div className='app'>
       <Routes>
@@ -45,7 +61,7 @@ const App = () => {
         <Route
           path='/search'
           element={
-            <Search allBooks={allBooks} updateShelf={updateShelf} />
+            <Search allBooks={allBooks} updateShelf={updateShelf} useDebounce={useDebounce} />
           }
         />
         <Route path='*' element={<NotFound />} />

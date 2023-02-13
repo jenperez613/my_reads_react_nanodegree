@@ -1,17 +1,35 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../BooksAPI';
 import Book from './Book';
 import NotFound from './NotFound';
 
-const Search = ({ allBooks, updateShelf }) => {
+const Search = ({ allBooks, updateShelf, useDebounce }) => {
   const [query, setQuery] = useState('');
   const [resultsList, setResultsList] = useState([]);
+  const [searching, setIsSearching] = useState(false);
+
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
+    if (debouncedQuery) {
+      setIsSearching(true);
+      BooksAPI.search(debouncedQuery, 50).then((resultsList) => {
+        if (!resultsList.error) {
+          setResultsList(resultsList);
+          setIsSearching(false);
+        } else {
+          setResultsList([]);
+          setIsSearching(false);
+        }
+      });
+    }
+  }, [debouncedQuery]);
+
+ /*  useEffect(() => {
     const searchBooks = (query) => {
       if (query) {
-        BooksAPI.search(query).then((allBooks) => {
+        BooksAPI.search(query, 50).then((allBooks) => {
           if (!allBooks.error) {
             setResultsList(allBooks);
           } else {
@@ -24,7 +42,7 @@ const Search = ({ allBooks, updateShelf }) => {
       };
     };
     searchBooks(query);
-  }, [query]);
+  }, [query]); */
 
   return (
     <div className='search-books'>
@@ -39,6 +57,7 @@ const Search = ({ allBooks, updateShelf }) => {
             value={query}
             onChange={(e) => setQuery(e.target.value.trim())}
           />
+          {searching && <h1>Searching...</h1>}
         </div>
       </div>
       {resultsList.length !== allBooks.length && (
