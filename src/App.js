@@ -1,57 +1,57 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import * as BooksAPI from './BooksAPI';
-import Header from './components/Header';
+import Search from './components/Search';
 import Bookshelves from './components/Bookshelves';
+import NotFound from './components/NotFound';
 
-function App() {
-  const [books, setBooks] = useState([]);
-  const [showSearchPage, setShowSearchpage] = useState(false);
+const App = () => {
+  const [allBooks, setAllBooks] = useState([]);
 
   useEffect(() => {
-    const getBooks = async() => {
-      const res = await BooksAPI.getAll()
-      setBooks(res)
+    const getBooks = async () => {
+      const res = await BooksAPI.getAll();
+      setAllBooks(res);
+    };
+    getBooks();
+  }, []);
+
+  const updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+    if (shelf === 'none') {
+      setAllBooks(allBooks.filter((b) => b.id !== book.id));
+    } else {
+      book.shelf = shelf;
+      setAllBooks(
+        allBooks.filter((b) => b.id !== book.id).concat(book)
+      );
     }
-    getBooks()
-   }, [])
+  };
 
   return (
     <div className='app'>
-      {showSearchPage ? (
-        <div className='search-books'>
-          <div className='search-books-bar'>
-            <a
-              className='close-search'
-              onClick={() => setShowSearchpage(!showSearchPage)}>
-              Close
-            </a>
-            <div className='search-books-input-wrapper'>
-              <input
-                type='text'
-                placeholder='Search by title, author, or ISBN'
-              />
-            </div>
-          </div>
-          <div className='search-books-results'>
-            <ol className='books-grid'></ol>
-          </div>
-        </div>
-      ) : (
-        <div className='list-books'>
-          <Header/>
-          <div className='list-books-content'>
-              <Bookshelves books={books } />
-          </div>
-          <div className='open-search'>
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>
-              Add a book
-            </a>
-          </div>
-        </div>
-      )}
+      <Routes>
+        <Route
+          exact
+          path='/'
+          element={
+            <Bookshelves
+              allBooks={allBooks}
+              updateShelf={updateShelf}
+            />
+          }
+        />
+        <Route
+          path='/search'
+          element={
+            <Search allBooks={allBooks} updateShelf={updateShelf} />
+          }
+        />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
