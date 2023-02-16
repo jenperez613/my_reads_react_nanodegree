@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Divider from '@mui/material/Divider';
 
 const Copyright = () => {
   return (
@@ -21,8 +22,11 @@ const Footer = () => {
     <Box
       sx={{ bgcolor: 'background.paper', p: 6 }}
       component='footer'>
+      <Divider textAlign='center' role='presentation'>
+        This is the footer
+      </Divider>
       <Typography variant='h6' align='center' gutterBottom>
-        Footer
+        My Reads
       </Typography>
       <Typography
         variant='subtitle1'

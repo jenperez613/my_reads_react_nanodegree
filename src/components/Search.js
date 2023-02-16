@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as BooksAPI from '../BooksAPI';
 import Book from './Book';
 import NotFound from './NotFound';
@@ -8,6 +8,7 @@ const Search = ({ allBooks, updateShelf, useDebounce }) => {
   const [query, setQuery] = useState('');
   const [resultsList, setResultsList] = useState([]);
   const [searching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
 
   const debouncedQuery = useDebounce(query, 500);
 
@@ -83,7 +84,7 @@ const Search = ({ allBooks, updateShelf, useDebounce }) => {
               </li>
             );
           })}
-          {resultsList.length === 0 ? <NotFound /> : null}
+          {resultsList.length === 0 && !searching ? navigate('/notfound') : null}
         </ol>
       </div>
     </div>
