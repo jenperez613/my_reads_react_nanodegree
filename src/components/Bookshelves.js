@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
 import Shelf from './Shelf';
 import Header from './Header';
-import Divider from '@mui/material/Divider';
-import Footer from './Footer'
-import SearchIcon from '@mui/icons-material/Search';
+import Footer from './Footer';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 const Bookshelves = ({ allBooks, shelf, updateShelf }) => {
   const currentlyReading = allBooks.filter(
@@ -17,35 +18,43 @@ const Bookshelves = ({ allBooks, shelf, updateShelf }) => {
 
   return (
     <div>
-      <Header/>
+      <Header />
 
-    <div className='list-books'>
-      <div className='list-books-content'>
-        <div>
-          <Shelf
-            shelfTitle='Currently Reading'
-            allBooks={currentlyReading}
-            updateShelf={updateShelf}
-          />
-          <Shelf
-            shelfTitle='Want to Read'
-            allBooks={wantToRead}
-            updateShelf={updateShelf}
-          />
-          <Shelf
-            shelfTitle='Finished Reading'
-            allBooks={read}
-            updateShelf={updateShelf}
-          />
+      <div className='list-books'>
+        <div className='list-books-content'>
+          <div>
+            <Shelf
+              shelfTitle='Currently Reading'
+              allBooks={currentlyReading}
+              updateShelf={updateShelf}
+            />
+            <Shelf
+              shelfTitle='Want to Read'
+              allBooks={wantToRead}
+              updateShelf={updateShelf}
+            />
+            <Shelf
+              shelfTitle='Finished Reading'
+              allBooks={read}
+              updateShelf={updateShelf}
+            />
+          </div>
+          <Fab
+            component={Link}
+            to='/search'
+            aria-label='add'
+            color='secondary'
+            sx={{
+              position: 'fixed',
+              right: '25px',
+              bottom: '25px',
+            }}>
+            <AddIcon />
+          </Fab>
         </div>
-        <div className='open-search'>
-          <Link to='/search' className='open-search'>
-          </Link>
-        </div>
       </div>
-      </div>
-      <Footer/>
-      </div>
+      <Footer />
+    </div>
   );
 };
 

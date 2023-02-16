@@ -1,5 +1,7 @@
+import { Fab, NativeSelect } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Book = ({
   book,
@@ -36,10 +38,22 @@ const Book = ({
             height: 193,
             backgroundImage: `url(${book.imageLinks?.thumbnail})`,
           }}></div>
-        <div className='book-shelf-changer'>
-          <select
+        <Fab
+          component={NativeSelect}
+          color='secondary'
+          aria-label='change shelf'
+          sx={{
+            position: 'absolute',
+            right: '0',
+            bottom: '-10px',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+          }}>
+          <NativeSelect
             defaultValue={shelf || book.shelf ? book.shelf : 'none'}
-            onChange={onSelectChange}>
+            onChange={onSelectChange}
+            IconComponent={ExpandMoreIcon}>
             <option value='move' disabled>
               Move to...
             </option>
@@ -49,8 +63,8 @@ const Book = ({
             <option value='wantToRead'>Want to Read</option>
             <option value='read'>Finished Reading</option>
             <option value='none'>None</option>
-          </select>
-        </div>
+          </NativeSelect>
+        </Fab>
       </div>
       <div className='book-title'>{book.title}</div>
       <div className='book-authors'>
