@@ -2,11 +2,9 @@ import NativeSelect from '@mui/material/NativeSelect';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const Book = ({
   book,
   id,
-  bookId,
   title,
   authors,
   imageLinks,
@@ -15,6 +13,12 @@ const Book = ({
   getBooks,
 }) => {
   const navigate = useNavigate();
+
+  const handleBookDetails = (event) => {
+    event.preventDefault();
+    console.log('Clicked book:', book);
+    navigate(`/books/${book.id}`);
+  };
 
   const onShelfChange = (e) => {
     const value = e.target.value;
@@ -25,7 +29,7 @@ const Book = ({
   const onSelectChange = (e) => {
     const value = e.target.value;
     updateShelf(book, value);
-    onShelfChange(book, value); //
+    onShelfChange(book, value);
   };
 
   return (
@@ -37,10 +41,10 @@ const Book = ({
             width: 128,
             height: 193,
             backgroundImage: `url(${book.imageLinks?.thumbnail})`,
-          }}></div>
-        <div
-          className='book-shelf-changer'
-          aria-label='change shelf'>
+          }}
+          onClick={handleBookDetails}></div>
+
+        <div className='book-shelf-changer' aria-label='change shelf'>
           <NativeSelect
             className='book-shelf-changer-select'
             defaultValue={shelf || book.shelf ? book.shelf : 'none'}
@@ -57,7 +61,9 @@ const Book = ({
           </NativeSelect>
         </div>
       </div>
-      <div className='book-title'>{book.title}</div>
+      <div className='book-title' onClick={handleBookDetails}>
+        {book.title}
+      </div>
       <div className='book-authors'>
         {book.authors && `${book.authors.join(', ')}`}
       </div>

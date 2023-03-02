@@ -8,10 +8,35 @@ body {
 }
 body,
 .app {
-  background: white;
+  background: #4568dc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b06ab3,
+    #4568dc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* main page */
+.appbar {
+  background: #fc466b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+    0 0 6px rgba(0, 0, 0, 0.23);
+}
 
 .list-books-title {
   padding: 10px 0;
@@ -25,6 +50,7 @@ body,
 }
 
 .list-books-content {
+  margin-top: 90px;
   padding: 0 0 80px;
   flex: 1;
 }
@@ -49,7 +75,8 @@ body,
 /* search page */
 
 .search-books-bar {
-  position: fixed;
+  position: relative;
+  margin-top: 60px;
   width: 100%;
   top: 0;
   left: 0;
@@ -104,6 +131,19 @@ body,
   text-align: left;
 }
 
+.showing-books {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.showing-books button {
+  color: blue;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+}
+
 .book {
   width: 140px;
 }
@@ -113,9 +153,10 @@ body,
 }
 .book-title {
   margin-top: 10px;
+  cursor: pointer;
 }
 .book-authors {
-  color: #999;
+  color: #fff;
 }
 
 .book-top {
@@ -147,40 +188,123 @@ body,
   cursor: pointer;
 }
 
+.loading-box {
+  text-align: center;
+  margin-top: 40px;
+}
+
 /* book cover */
 
 .book-cover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
     0 3px 6px rgba(0, 0, 0, 0.23);
   background: #eee;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.book-cover:hover {
+  transform: scale(1.1);
+}
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
 }
 
-.showing-books {
+/* book detail */
+.book-detail {
   text-align: center;
-  margin: 20px 0;
 }
 
-.showing-books button {
-  color: blue;
-  background: transparent;
-  border: none;
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 20px;
+  justify-content: center;
+  align-content: center;
+}
+
+.details-grid-item {
+  max-width: 300px;
+}
+
+.detail-prop {
+  margin-bottom: 10px;
+}
+
+.detail-prop-label {
+  color: rgba(0, 0, 0, 0.54);
+  display: block;
+  font-size: 12px;
+}
+
+.detail-prop-content {
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  font-size: 14px;
+}
+
+.share-details {
+  margin: 10px;
+}
+/*dialog*/
+.confirm-dialog {
+  margin-right: 12px;
+}
+
+/*share page*/
+.share {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 30px;
+  text-align: center;
+}
+
+.share-page-button {
   cursor: pointer;
-  font-size: inherit;
 }
 
-.error {
-  color: red;
-  text-align: center;
-  padding: 20px 0;
+.share-page-button:hover:not(:active) {
+  opacity: 0.8;
 }
 
-.fabStyle {
-  position: 'absolute';
-  bottom: 16;
-  right: 16;
-};
+.share-page-count {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+/*Footer*/
+
+.footer {
+  padding: 6;
+  background: #fc466b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3f5efb,
+    #fc466b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  position: static !important;
+  bottom: 0 !important;
+  width: 100%;
+}
+
+@media (max-width: 400px) {
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    grid-gap: 10px;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .details-grid-item {
+    max-width: 300px;
+  }
+}

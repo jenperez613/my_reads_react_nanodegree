@@ -20,7 +20,7 @@ const Copyright = () => {
 const Footer = () => {
   return (
     <Box
-      sx={{ bgcolor: 'background.paper', p: 6 }}
+      className='footer'
       component='footer'>
       <Divider textAlign='center' role='presentation'>
         This is the footer

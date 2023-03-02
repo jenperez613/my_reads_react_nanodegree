@@ -5,6 +5,8 @@ import * as BooksAPI from './BooksAPI';
 import Search from './components/Search';
 import Bookshelves from './components/Bookshelves';
 import NotFound from './components/NotFound';
+import BookDetails from './components/BookDetails';
+import ErrorMessage from './components/ErrorMessage';
 
 const App = () => {
   const [allBooks, setAllBooks] = useState([]);
@@ -58,12 +60,22 @@ const App = () => {
             />
           }
         />
+
         <Route
           path='/search'
           element={
-            <Search allBooks={allBooks} updateShelf={updateShelf} useDebounce={useDebounce} />
+            <Search
+              allBooks={allBooks}
+              updateShelf={updateShelf}
+              useDebounce={useDebounce}
+            />
           }
         />
+        <Route
+          path='/books/:bookId'
+          element={<BookDetails allBooks={allBooks} />}
+        />
+        <Route path='/error' element={<ErrorMessage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
