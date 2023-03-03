@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import HomeIcon from '@mui/icons-material/Home';
-import Header from './Header';
+
 
 const ErrorMessage = () => {
   return (
@@ -13,7 +13,6 @@ const ErrorMessage = () => {
       <Helmet>
         <title>Error</title>
       </Helmet>
-      <Header />
       <Box
         sx={{
           display: 'flex',

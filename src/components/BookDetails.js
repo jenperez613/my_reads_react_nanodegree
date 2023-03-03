@@ -16,42 +16,49 @@ import NotFound from './NotFound';
 import Share from './Share';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import Footer from './Footer';
-import Header from './Header';
+
 
 const BookDetails = ({ allBooks }) => {
-  const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [showNotFound, setShowNotFound] = useState(false);
   const [book, setBook] = useState({});
 
   const { bookId } = useParams();
   console.log(bookId);
 
   useEffect(() => {
-    setStatus('loading');
-    const result = allBooks.find((book) => book.id === bookId);
-    if (result) {
-      setBook(result);
-      setStatus('success');
-    } else if (book.errorCode === 500) {
-      setStatus('not_found');
-    } else {
-      setStatus('error');
+    if (bookId) {
+      setLoading(true);
+      setShowNotFound(false);
+      try {
+        const result = allBooks.find((book) => book.id === bookId);
+        if (!result.error) {
+          setBook(result);
+        } else {
+          setBook({});
+        }
+        setLoading(false);
+      } catch (error) {
+        setHasError(true);
+        setLoading(false);
+      }
     }
-  }, [allBooks, book, bookId]);
+  }, [allBooks, bookId]);
 
   return (
     <div className='book-detail'>
-      <Header />
+
       <div className='loading-box'>
         <SyncLoader
-          loading={status === 'loading'}
+          loading={loading}
           size={50}
           message='Loading Book Details'
         />
       </div>
-      {status === 'error' && <ErrorMessage />}
-      {status === 'not_found' && <NotFound />}
-      {status === 'success' && (
+      {hasError && <ErrorMessage />}
+      {showNotFound && <NotFound />}
+      {book && (
         <Card style={{ margin: '60px', padding: '20px' }}>
           <div>
             <CardHeader
@@ -153,7 +160,7 @@ const BookDetails = ({ allBooks }) => {
           </CardActions>
         </Card>
       )}
-      <Footer />
+
     </div>
   );
 };

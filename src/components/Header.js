@@ -9,6 +9,12 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { blue, pink } from '@mui/material/colors';
+import {
+  SearchIconWrapper,
+  Search,
+  StyledInputBase,
+} from '../utils/searchUtils';
+import SearchIcon from '@mui/icons-material/Search';
 
 const theme = createTheme({
   palette: {
@@ -17,7 +23,7 @@ const theme = createTheme({
   },
 });
 
-const Header = () => {
+const Header = ({ useDebounce }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -37,6 +43,15 @@ const Header = () => {
             }}>
             My Reads
           </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder='Search…'
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
         </Toolbar>
       </AppBar>
     </ThemeProvider>

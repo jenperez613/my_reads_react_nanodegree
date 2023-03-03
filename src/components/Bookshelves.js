@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import Shelf from './Shelf';
-import Header from './Header';
-import Footer from './Footer';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -24,8 +22,6 @@ const Bookshelves = ({
 
   return (
     <div>
-      <Header />
-
       <div className='list-books'>
         <div className='list-books-content'>
           <Shelf
@@ -58,7 +54,6 @@ const Bookshelves = ({
           <AddIcon />
         </Fab>
       </div>
-      <Footer />
     </div>
   );
 };

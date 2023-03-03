@@ -2,8 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
+
 import Fab from '@mui/material/Fab';
 import HomeIcon from '@mui/icons-material/Home';
 
@@ -13,7 +12,7 @@ const NotFound = () => {
       <Helmet>
         <title>404: Not Found</title>
       </Helmet>
-      <Header />
+
       <Box
         sx={{
           display: 'flex',
@@ -49,7 +48,6 @@ const NotFound = () => {
         }}>
         <HomeIcon />
       </Fab>
-      <Footer />
     </>
   );
 };

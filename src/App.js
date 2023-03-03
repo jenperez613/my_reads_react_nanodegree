@@ -7,6 +7,8 @@ import Bookshelves from './components/Bookshelves';
 import NotFound from './components/NotFound';
 import BookDetails from './components/BookDetails';
 import ErrorMessage from './components/ErrorMessage';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
   const [allBooks, setAllBooks] = useState([]);
@@ -49,6 +51,7 @@ const App = () => {
 
   return (
     <div className='app'>
+      <Header useDebounce={useDebounce} />
       <Routes>
         <Route
           exact
@@ -78,6 +81,7 @@ const App = () => {
         <Route path='/error' element={<ErrorMessage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
