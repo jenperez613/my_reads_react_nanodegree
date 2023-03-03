@@ -84,6 +84,7 @@ const Search = ({ allBooks, updateShelf, useDebounce, book }) => {
           sx={{ width: 300, marginTop: 10, alignItems: 'center' }}>
           <TextField
             id='search-bar'
+            value={query}
             type='text'
             onInput={(e) => {
               setQuery(e.target.value).trim().replace(/^\s+/, '');
@@ -91,7 +92,6 @@ const Search = ({ allBooks, updateShelf, useDebounce, book }) => {
             label='Enter a title or author'
             variant='outlined'
             placeholder='Search by title or author...'
-            value={query}
             options={allBooks.map(
               (book) => book.title + book.authors
             )}

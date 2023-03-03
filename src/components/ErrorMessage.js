@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import HomeIcon from '@mui/icons-material/Home';
 
-
 const ErrorMessage = () => {
   return (
     <>
@@ -36,8 +35,16 @@ const ErrorMessage = () => {
                 aria-label='back home'>
                 Back Home
               </Button>
+              <Button
+                sx={{ margin: 2 }}
+                variant='contained'
+                component={Link}
+                to='/search'
+                aria-label='back to search'>
+                Back to Search
+              </Button>
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={6} item>
               <img
                 src='https://media.giphy.com/media/1RkDDoIVs3ntm/giphy.gif'
                 alt='error'

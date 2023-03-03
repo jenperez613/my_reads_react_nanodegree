@@ -35,6 +35,14 @@ const NotFound = () => {
           aria-label='back home'>
           Back Home
         </Button>
+        <Button
+          sx={{ mt: 2 }}
+          variant='contained'
+          component={Link}
+          to='/search'
+          aria-label='back to search'>
+          Back to Search
+        </Button>
       </Box>
       <Fab
         component={Link}
