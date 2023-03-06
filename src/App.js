@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import './App.css';
 import * as BooksAPI from './BooksAPI';
 import Search from './components/Search';
@@ -12,6 +12,8 @@ import Footer from './components/Footer';
 
 const App = () => {
   const [allBooks, setAllBooks] = useState([]);
+
+  const { bookId } = useParams();
 
   useEffect(() => {
     const getBooks = async () => {
@@ -76,12 +78,12 @@ const App = () => {
         />
         <Route
           path='/books/:bookId'
-          element={<BookDetails allBooks={allBooks} />}
+          element={<BookDetails allBooks={allBooks} id={bookId} />}
         />
         <Route path='/error' element={<ErrorMessage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      <Footer />
+      <Footer  />
     </div>
   );
 };

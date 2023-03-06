@@ -14,6 +14,8 @@ const Book = ({
 }) => {
   const navigate = useNavigate();
 
+
+
   const handleBookDetails = (event) => {
     event.preventDefault();
     console.log('Clicked book:', book);
@@ -64,7 +66,7 @@ const Book = ({
       <div className='book-title' onClick={handleBookDetails}>
         {book.title}
       </div>
-      <div className='book-authors'>
+      <div className='book-authors-search'>
         {book.authors && `${book.authors.join(', ')}`}
       </div>
     </div>

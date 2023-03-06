@@ -19,11 +19,9 @@ const Copyright = () => {
 
 const Footer = () => {
   return (
-    <Box
-      className='footer'
-      component='footer'>
+    <Box className='footer' component='footer'>
       <Divider textAlign='center' role='presentation'>
-        This is the footer
+        reactnanodegreeprojects.cloud
       </Divider>
       <Typography variant='h6' align='center' gutterBottom>
         My Reads

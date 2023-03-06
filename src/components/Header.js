@@ -4,9 +4,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { blue, pink } from '@mui/material/colors';
 import {
@@ -24,6 +24,16 @@ const theme = createTheme({
 });
 
 const Header = ({ useDebounce }) => {
+  const [query, setQuery] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setQuery(e.target.value);
+    navigate('/search');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -48,8 +58,10 @@ const Header = ({ useDebounce }) => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder='Search…'
+              placeholder='coming soon!'
               inputProps={{ 'aria-label': 'search' }}
+              value={query}
+              onInput={handleSearch}
             />
           </Search>
         </Toolbar>

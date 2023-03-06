@@ -53,6 +53,11 @@ body,
   margin-top: 90px;
   padding: 0 0 80px;
   flex: 1;
+  color: black;
+}
+
+#book-search-results {
+  color: #000 !important;
 }
 
 .bookshelf {
@@ -155,8 +160,12 @@ body,
   margin-top: 10px;
   cursor: pointer;
 }
-.book-authors {
+.book-authors-main {
   color: #fff;
+}
+
+.book-authors-search {
+  color: black;
 }
 
 .book-top {
@@ -293,6 +302,10 @@ body,
   position: static !important;
   bottom: 0 !important;
   width: 100%;
+}
+
+.footer-search {
+  visibility: hidden;
 }
 
 @media (max-width: 400px) {
